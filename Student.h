@@ -13,19 +13,34 @@ struct Date {
 std::ostream& operator <<(std::ostream& out, const Date& d);
 std::istream& operator >>(std::istream& in, Date& d);
 
-
-struct Student {
+struct Person {
     std::string name;
     std::string surname;
     std::string middleName;
     Date birthDate;
+    bool sex; // 1 - M, 0 - W
+};
+
+struct Student : public Person {
+public:
+    using Grades = std::map<std::string, int>;
+    using SessionGrades = std::vector<Grades>;
+
+public:
+    void init();
+    void edit();
+
+public:
     int enterYear;
     std::string faculty;
     std::string department;
     int group;
     long gradeBookNo;
-    std::string sex;
-    std::vector<std::map<std::string, int>> grades;
+    SessionGrades grades;
+
+private:
+    void editBirthDate();
+    void editGrades();
 };
 
 std::ostream& operator <<(std::ostream& out, const Student& st);

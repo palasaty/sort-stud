@@ -12,14 +12,19 @@ public:
 
 	bool empty() { return _database.empty(); }
 
-	void addStudent(Student& st) { _database[st.gradeBookNo] = st; }
-	Student& getStudent(long id) { return _database[id]; }
 	void print();
+	void addStudent();
+	void editStudent();
+	void removeStudent();
 
+	void customSort() {}
 
 private:
 	void load();
 	void save();
+
+	void addStudent(Student& st);
+	Student& getStudent(long id) { return _database[id]; }
 
 private:
 	std::map<long, Student> _database;;
