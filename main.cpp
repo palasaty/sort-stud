@@ -1,11 +1,12 @@
 ﻿
 #include <iostream>
+#include "students.h"
 
-
-cla
 
 int main()
 {
-    std::cout << "Hello World!\n";
+    Students students;
+
+    return 0;
 }
 

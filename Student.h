@@ -10,6 +10,10 @@ struct Date {
     int day;
 };
 
+std::ostream& operator <<(std::ostream& out, const Date& d);
+std::istream& operator >>(std::istream& in, Date& d);
+
+
 struct Student {
     std::string name;
     std::string surname;
@@ -20,6 +24,9 @@ struct Student {
     std::string department;
     int group;
     long gradeBookNo;
-    bool sex;
+    std::string sex;
     std::vector<std::map<std::string, int>> grades;
 };
+
+std::ostream& operator <<(std::ostream& out, const Student& st);
+std::istream& operator >>(std::istream& in, Student& st);
