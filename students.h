@@ -17,7 +17,7 @@ public:
 	void editStudent();
 	void removeStudent();
 
-	void customSort() {}
+	void customSort();
 
 private:
 	void load();
@@ -27,5 +27,5 @@ private:
 	Student& getStudent(long id) { return _database[id]; }
 
 private:
-	std::map<long, Student> _database;;
+	std::map<long, Student> _database;
 };

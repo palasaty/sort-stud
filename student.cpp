@@ -5,7 +5,7 @@
 
 std::ostream& operator <<(std::ostream& out, const Date& d)
 {
-    const std::string delim = ".";
+    const std::string delim = "  ";
     out << d.day << delim << d.month << delim << d.year;
     return out;
 }
@@ -21,7 +21,15 @@ std::ostream& operator <<(std::ostream& out, const Student& st)
     const std::string delim = "  ";
     out << st.name << delim << st.middleName << delim << st.surname << delim << st.birthDate << delim
         << st.enterYear << delim << st.faculty << delim << st.department << delim << st.group << delim
-        << st.gradeBookNo << delim << st.sex;
+        << st.gradeBookNo << delim << st.sex << delim;
+
+    out << st.grades.size() << delim;
+    for (auto& s : st.grades) {
+        out << s.size() << delim;
+        for (auto& sbj : s) {
+            out << sbj.first << delim << sbj.second << delim;
+        }
+    }
     return out;
 }
 
@@ -29,7 +37,36 @@ std::istream& operator >>(std::istream& in, Student& st)
 {
     in >> st.name >> st.middleName >> st.surname >> st.birthDate >> st.enterYear >> st.faculty >> st.department >> st.group
         >> st.gradeBookNo >> st.sex;
+    int s_size, sbj_size;
+    in >> s_size;
+    for (int i = 0; i < s_size; ++i) {
+        st.grades.push_back(Student::Grades());
+        in >> sbj_size;
+        for (int j = 0; j < sbj_size; ++j) {
+            std::string sbj;
+            int grade;
+            in >> sbj >> grade;
+            st.grades[i][sbj] = grade;
+        }
+
+    }
     return in;
+}
+
+float Student::avgGrade(int session) const {
+    if (session < 0 || session >= grades.size()) {
+        std::cout << "Incorrect session number\n";
+        return 0;
+    }
+
+    int cnt = 0;
+    float res = 0;
+    for (auto& sbj : grades[session]) {
+        cnt++;
+        res += sbj.second;
+    }
+
+    return res / cnt;
 }
 
 void Student::init() {

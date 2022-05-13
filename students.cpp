@@ -1,6 +1,7 @@
 #include "students.h"
 #include <iostream>
 #include <sstream>
+#include <algorithm>
 
 void Students::load() {
     std::ifstream in(gFileName);
@@ -78,12 +79,37 @@ void Students::editStudent() {
 
 void Students::removeStudent() {
     int id;
-    std::cout << "Enter No to edit: "; std::cin >> id;
+    std::cout << "Enter No to remove: "; std::cin >> id;
 
     auto it = _database.find(id);
     if (it != _database.end())
         _database.erase(it);
     else {
         std::cout << "No such student\n";
+    }
+}
+
+void Students::customSort()
+{
+    int idx;
+    std::cout << "Sesion: "; std::cin >> idx;
+    int yearMin, yearMax;
+    std::cout << "Min birth year: "; std::cin >> yearMin;
+    std::cout << "Max birth year: "; std::cin >> yearMax;
+
+    std::vector<Student> filtered;
+
+    for (auto& p : _database) {
+        if (p.second.birthDate.year >= yearMin && p.second.birthDate.year <= yearMax) {
+            filtered.push_back(p.second);
+        }
+    }
+
+    std::sort(filtered.begin(), filtered.end(), [&](const Student& st1, const Student& st2) {
+            return st1.avgGrade(idx) < st2.avgGrade(idx);
+        });
+
+    for (const auto& st : filtered) {
+        std::cout << st << "\n";
     }
 }

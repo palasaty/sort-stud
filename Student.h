@@ -29,6 +29,7 @@ public:
 public:
     void init();
     void edit();
+    float avgGrade(int session) const;
 
 public:
     int enterYear;
