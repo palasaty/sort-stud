@@ -49,6 +49,7 @@ void Student::init() {
     int session_n;
     std::cout << "Session count: "; std::cin >> session_n;
     for (int i = 0; i < session_n; ++i) {
+        grades.push_back(Grades());
         int subject_n;
         std::cout << "Subjects count: "; std::cin >> subject_n;
         for (int j = 0; j < subject_n; ++j) {
