@@ -42,7 +42,7 @@ void Students::print() {
     }
 
     for (const auto& st : _database) {
-        std::cout << st.second << "\n";
+        st.second.print();
     }
 }
 
@@ -110,6 +110,6 @@ void Students::customSort()
         });
 
     for (const auto& st : filtered) {
-        std::cout << st << "\n";
+        st.print();
     }
 }

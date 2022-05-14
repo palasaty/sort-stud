@@ -3,11 +3,18 @@
 #include <string>
 #include <vector>
 #include <map>
+#include <sstream>
 
 struct Date {
     int year;
     int month;
     int day;
+
+    std::string toString() const {
+        std::stringstream ss;
+        ss << day << "." << month << "." << year;
+        return ss.str();
+    }
 };
 
 std::ostream& operator <<(std::ostream& out, const Date& d);
@@ -29,6 +36,8 @@ public:
 public:
     void init();
     void edit();
+
+    void print() const;
     float avgGrade(int session) const;
 
 public:

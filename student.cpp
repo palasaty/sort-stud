@@ -33,6 +33,26 @@ std::ostream& operator <<(std::ostream& out, const Student& st)
     return out;
 }
 
+void Student::print() const {
+    std::cout << "==============================================================\n";
+    std::cout << "Name: " << name << "\tMiddleName: " << middleName << "\tSurname: " << surname << "\n";
+    std::cout << "Birth date: " << birthDate.toString() << "\n";
+    std::cout << "Sex: " << (sex ? "man" : "woman") << "\n";
+    std::cout << "Faculty: " << faculty << "\tDepartment: " << department << "\tGroup: " << group << "\n";
+    std::cout << "Enter year: " << enterYear << "\n";
+    std::cout << "Grade book #: " << gradeBookNo << "\n";
+    std::cout << "==============================================================\n";
+
+    for (int i = 0; i < grades.size(); ++i) {
+        std::cout << "Session " << i + 1 << ": \n";
+        for (auto& sbj : grades[i]) {
+            std::cout << "Subject: " << sbj.first << "\tGrade: " << sbj.second << "\n";
+        }
+    }
+    std::cout << "==============================================================\n\n";
+
+}
+
 std::istream& operator >>(std::istream& in, Student& st)
 {
     in >> st.name >> st.middleName >> st.surname >> st.birthDate >> st.enterYear >> st.faculty >> st.department >> st.group
