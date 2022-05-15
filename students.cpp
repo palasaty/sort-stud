@@ -105,6 +105,13 @@ void Students::customSort()
         }
     }
 
+    for (auto& st : filtered) {
+        if (!st.checkSession(idx)) {
+            std::cout << "No such session '" << idx << "' for " << st.gradeBookNo << ", can't process with custom sort\n";
+            return;
+        }
+    }
+
     std::sort(filtered.begin(), filtered.end(), [&](const Student& st1, const Student& st2) {
             return st1.avgGrade(idx) < st2.avgGrade(idx);
         });

@@ -39,6 +39,7 @@ public:
 
     void print() const;
     float avgGrade(int session) const;
+    bool checkSession(int) const;
 
 public:
     int enterYear;

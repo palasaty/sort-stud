@@ -73,12 +73,16 @@ std::istream& operator >>(std::istream& in, Student& st)
     return in;
 }
 
-float Student::avgGrade(int session) const {
-    if (session < 0 || session >= grades.size()) {
+bool Student::checkSession(int s) const {
+    if (s < 0 || s >= grades.size()) {
         std::cout << "Incorrect session number\n";
-        return 0;
+        return false;
     }
 
+    return true;
+}
+
+float Student::avgGrade(int session) const {
     int cnt = 0;
     float res = 0;
     for (auto& sbj : grades[session]) {
