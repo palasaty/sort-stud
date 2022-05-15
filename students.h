@@ -27,5 +27,5 @@ private:
 	Student& getStudent(long id) { return _database[id]; }
 
 private:
-	std::map<long, Student> _database;
+	std::map<int, Student> _database;
 };
