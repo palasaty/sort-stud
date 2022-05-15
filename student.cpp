@@ -93,31 +93,48 @@ float Student::avgGrade(int session) const {
     return res / cnt;
 }
 
+void readNumeric(int& num) {
+    while (!(std::cin >> num)) {  
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::cout << "Invalid input.  Reenter the number: ";
+    }
+}
+
+void readBool(bool& b) {
+    int n;
+    while (!(std::cin >> n) || n !=0 && n != 1) {
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::cout << "Invalid input.  Reenter the number: ";
+    }
+}
+
 void Student::init() {
     std::cout << "Name: "; std::cin >> name;
     std::cout << "Middle name: "; std::cin >> middleName;
     std::cout << "Surname: "; std::cin >> surname;
-    std::cout << "Birth year: "; std::cin >> birthDate.year;
-    std::cout << "Birth month: "; std::cin >> birthDate.month;
-    std::cout << "Birth day: "; std::cin >> birthDate.day;
-    std::cout << "Enter year: "; std::cin >> enterYear;
+    std::cout << "Birth year: "; readNumeric(birthDate.year);
+    std::cout << "Birth month: "; readNumeric(birthDate.month);
+    std::cout << "Birth day: "; readNumeric(birthDate.day);
+    std::cout << "Enter year: "; readNumeric(enterYear);
     std::cout << "Faculty: "; std::cin >> faculty;
     std::cout << "Department: "; std::cin >> department;
-    std::cout << "Group: "; std::cin >> group;
-    std::cout << "GradeBookNo: "; std::cin >> gradeBookNo;
-    std::cout << "Sex: "; std::cin >> sex;
+    std::cout << "Group: "; readNumeric(group);
+    std::cout << "GradeBookNo: "; readNumeric(gradeBookNo);
+    std::cout << "Sex: "; readBool(sex);
     
     int session_n;
-    std::cout << "Session count: "; std::cin >> session_n;
+    std::cout << "Session count: "; readNumeric(session_n);
     for (int i = 0; i < session_n; ++i) {
         grades.push_back(Grades());
         int subject_n;
-        std::cout << "Subjects count: "; std::cin >> subject_n;
+        std::cout << "Subjects count: "; readNumeric(subject_n);
         for (int j = 0; j < subject_n; ++j) {
             std::string name;
             int grade;
             std::cout << "Subject name: "; std::cin >> name;
-            std::cout << "Grade:"; std::cin >> grade;
+            std::cout << "Grade:"; readNumeric(grade);
             grades[i][name] = grade;
         }
     }
@@ -160,12 +177,12 @@ void Student::editBirthDate() {
     int answer;
     while (go) {
         printBirhDateMenu();
-        std::cin >> answer;
+        readNumeric(answer);
         switch (answer) {
             case 4: go = false; break;
-            case 1: std::cout << "Birth day: "; std::cin >> birthDate.day; break;
-            case 2: std::cout << "Birth month: "; std::cin >> birthDate.month; break;
-            case 3: std::cout << "Birth year: "; std::cin >> birthDate.year; break;
+            case 1: std::cout << "Birth day: "; readNumeric(birthDate.day); break;
+            case 2: std::cout << "Birth month: "; readNumeric(birthDate.month); break;
+            case 3: std::cout << "Birth year: "; readNumeric(birthDate.year); break;
             default:
                 std::cout << "Unknown answer\n";
         }
@@ -179,17 +196,17 @@ void Student::editGrades() {
     int grade;
     while (go) {
         subject.assign("");
-        std::cout << "Choose session: "; std::cin >> session;
+        std::cout << "Choose session: "; readNumeric(session);
         if (session < 0 || session >= grades.size())
             continue;
         printGradesMenu();
-        std::cin >> answer;
+        readNumeric(answer);
         switch (answer) {
             case 4: go = false; break;
             case 2:
             case 1: {
                 std::cout << "Subject: "; std::cin >> subject;
-                std::cout << "Grade: "; std::cin >> grade;
+                std::cout << "Grade: "; readNumeric(grade);
                 grades[session][subject] = grade;
                 break;
             }
@@ -215,18 +232,18 @@ void Student::edit() {
 
     while (go) {
         printEditMenu();
-        std::cin >> answer;
+       readNumeric(answer);
 
         switch (answer) {
             case 11: go = false; break;
             case 1: std::cout << "New name: "; std::cin >> name; break;
             case 2: std::cout << "New middle name: "; std::cin >> middleName; break;
             case 3: std::cout << "New surname: "; std::cin >> surname; break;
-            case 5: std::cout << "New enter year: "; std::cin >> enterYear; break;
+            case 5: std::cout << "New enter year: "; readNumeric(enterYear); break;
             case 6: std::cout << "New faculty: "; std::cin >> faculty; break;
             case 7: std::cout << "New department: "; std::cin >> department; break;
-            case 8: std::cout << "New group: "; std::cin >> group; break;
-            case 9: std::cout << "New sex: "; std::cin >> sex; break;
+            case 8: std::cout << "New group: "; readNumeric(group); break;
+            case 9: std::cout << "New sex: "; readBool(sex); break;
             case 4: editBirthDate(); break;
             case 10: editGrades(); break;
             default:

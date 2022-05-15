@@ -46,7 +46,7 @@ public:
     std::string faculty;
     std::string department;
     int group;
-    long gradeBookNo;
+    int gradeBookNo;
     SessionGrades grades;
 
 private:
